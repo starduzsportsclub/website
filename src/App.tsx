@@ -25,17 +25,17 @@ function App() {
           <Text fontFamily={'Montserrat'} fontWeight="bold" fontSize={'3xl'}>
             SPORTS
           </Text>
-          <Text
-            fontFamily={'Montserrat'}
-            fontWeight="medium"
-            fontSize={'2xl'}
-            mt={5}
-          >
+          <Text fontFamily={'Montserrat'} fontWeight="medium" fontSize={'2xl'}>
             The club participates in sporting activities as well as organizing
             sports related events. The aim of this, aside from being active, is
-            to encourage participation and bringing unity amoungst members.
+            to encourage participation and bringing unity amongst members.
           </Text>
-          <Text fontFamily={'Montserrat'} fontWeight="bold" fontSize={'3xl'}>
+          <Text
+            fontFamily={'Montserrat'}
+            fontWeight="bold"
+            fontSize={'3xl'}
+            mt={5}
+          >
             SERVICE
           </Text>
           <Text fontFamily={'Montserrat'} fontWeight="medium" fontSize={'2xl'}>
