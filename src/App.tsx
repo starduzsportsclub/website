@@ -22,15 +22,6 @@ function App() {
             common belief and are made up of people within our community.
           </Text>
           <Divider w={'20%'} borderWidth={5} my={5} borderColor="red" />
-          <Text fontFamily={'Montserrat'} fontWeight="bold" fontSize={'3xl'}>
-            SERVICE
-          </Text>
-          <Text fontFamily={'Montserrat'} fontWeight="medium" fontSize={'2xl'}>
-            The club has a passion to serve the community especially where the
-            need is. Each year it carries out activities for the benefit of
-            those facing hardship. Year on year, the services provided by
-            Starduz has had positive impact on the community.
-          </Text>
           <Text
             mt={5}
             fontFamily={'Montserrat'}
@@ -43,6 +34,15 @@ function App() {
             The club participates in sporting activities as well as organizing
             sports related events. The aim of this, aside from being active, is
             to encourage participation and bringing unity amoungst members.
+          </Text>
+          <Text fontFamily={'Montserrat'} fontWeight="bold" fontSize={'3xl'}>
+            SERVICE
+          </Text>
+          <Text fontFamily={'Montserrat'} fontWeight="medium" fontSize={'2xl'}>
+            The club has a passion to serve the community especially where the
+            need is. Each year it carries out activities for the benefit of
+            those facing hardship. Year on year, the services provided by
+            Starduz has had positive impact on the community.
           </Text>
           <Text
             mt={5}
