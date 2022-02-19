@@ -22,15 +22,15 @@ function App() {
             common belief and are made up of people within our community.
           </Text>
           <Divider w={'20%'} borderWidth={5} my={5} borderColor="red" />
-          <Text
-            mt={5}
-            fontFamily={'Montserrat'}
-            fontWeight="bold"
-            fontSize={'3xl'}
-          >
+          <Text fontFamily={'Montserrat'} fontWeight="bold" fontSize={'3xl'}>
             SPORTS
           </Text>
-          <Text fontFamily={'Montserrat'} fontWeight="medium" fontSize={'2xl'}>
+          <Text
+            fontFamily={'Montserrat'}
+            fontWeight="medium"
+            fontSize={'2xl'}
+            mt={5}
+          >
             The club participates in sporting activities as well as organizing
             sports related events. The aim of this, aside from being active, is
             to encourage participation and bringing unity amoungst members.
