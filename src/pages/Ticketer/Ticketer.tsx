@@ -12,6 +12,7 @@ function Ticketer() {
   const snap = useSnapshot(state);
   var [isLoading, setIsLoading] = useState(false);
   var [ticketType, setTicketType] = useState('');
+  var [isQRScannerEnabled, setIsQRScannerEnabled] = useState(false);
 
   const updateSheet = async () => {
     setIsLoading(true);
@@ -29,9 +30,18 @@ function Ticketer() {
 
     try {
       await api.put(`/A${ticketNumber}:B${ticketNumber}`, data, config);
+      setTicketType('');
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
+    }
+  };
+
+  const enableQRScanner = () => {
+    if (ticketType !== '') {
+      setIsQRScannerEnabled(true);
+    } else {
+      alert('Please select a ticket type');
     }
   };
 
@@ -39,7 +49,7 @@ function Ticketer() {
     <Box className="Ticketer">
       <Box className="Ticketer-header">
         {snap.loginDetails && !isLoading ? (
-          <Box mt={100}>
+          <Box mt={100} mx={10}>
             <Text
               fontFamily={'Montserrat'}
               fontWeight="bold"
@@ -48,14 +58,7 @@ function Ticketer() {
             >
               PLEASE SCAN QR CODE
             </Text>
-            <Button
-              mt={100}
-              onClick={updateSheet}
-              color={'black'}
-              fontFamily={'Montserrat'}
-            >
-              Scan QR Code
-            </Button>
+
             <Select
               placeholder="Select ticket option"
               size="lg"
@@ -67,18 +70,20 @@ function Ticketer() {
               onChange={(e) => {
                 setTicketType(e.target.value);
               }}
+              defaultValue={ticketType}
             >
               <option value="Paid Ticket Entry">Paid Ticket Entry</option>
               <option value="Door Sale Ticket">Door Sale Ticket</option>
               <option value="Takeaway Order">Takeaway Order</option>
             </Select>
 
-            <>
+            {isQRScannerEnabled ? (
               <QrReader
                 onResult={(result, error) => {
                   if (result !== undefined) {
-                    console.log(result);
                     state.qrCodeDetails = result;
+                    setIsQRScannerEnabled(false);
+                    updateSheet();
                   }
                 }}
                 constraints={{
@@ -87,7 +92,26 @@ function Ticketer() {
                   facingMode: 'environment',
                 }}
               />
-            </>
+            ) : null}
+            {snap.qrCodeDetails ? (
+              <Text
+                fontFamily={'Montserrat'}
+                fontWeight="bold"
+                fontSize={'3xl'}
+                color={'white'}
+                mt={10}
+              >
+                The Scanned Ticket Number is: {snap.qrCodeDetails.text}
+              </Text>
+            ) : null}
+            <Button
+              mt={10}
+              onClick={enableQRScanner}
+              color={'black'}
+              fontFamily={'Montserrat'}
+            >
+              Scan QR Code
+            </Button>
           </Box>
         ) : isLoading ? (
           <Loader />
