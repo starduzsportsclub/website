@@ -17,8 +17,17 @@ function Ticketer() {
 
   const updateSheet = async () => {
     setIsLoading(true);
-    const data = { bookId: 'test', studentId: student_id };
-    await api.post('/lessons', data);
+    const data = {
+      values: [[8, 'Paid Ticket Entry']],
+    };
+
+    let config = {
+      headers: {
+        Authorization: `Bearer ${snap.loginDetails.accessToken}`,
+      },
+    };
+
+    await api.post('/A6:B6:append', data, config);
     setIsLoading(false);
   };
 
@@ -35,7 +44,12 @@ function Ticketer() {
             >
               PLEASE SCAN QR CODE
             </Text>
-            <Button mt={100} onClick={updateSheet} color={'black'}>
+            <Button
+              mt={100}
+              onClick={updateSheet}
+              color={'black'}
+              fontFamily={'Montserrat'}
+            >
               Scan QR Code
             </Button>
           </Box>
@@ -43,6 +57,7 @@ function Ticketer() {
           <Loader />
         ) : (
           <Text
+            fontFamily={'Montserrat'}
             fontSize="4xl"
             fontWeight={'bold'}
             className="TicketerTitle"
