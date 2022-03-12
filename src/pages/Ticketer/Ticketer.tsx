@@ -6,15 +6,17 @@ import './Ticketer.css';
 import Loader from '../../components/Loader/Loader';
 import { api } from '../../utils/api';
 import { Box, Button, Select, Text } from '@chakra-ui/react';
+import { QrReader } from 'react-qr-reader';
 
 function Ticketer() {
   const snap = useSnapshot(state);
   var [isLoading, setIsLoading] = useState(false);
   var [ticketType, setTicketType] = useState('');
-  var [ticketNumber, setTicketNumber] = useState(0);
 
   const updateSheet = async () => {
     setIsLoading(true);
+
+    const ticketNumber = Number(snap.qrCodeDetails.text);
     const data = {
       values: [[ticketNumber, ticketType]],
     };
@@ -64,13 +66,28 @@ function Ticketer() {
               borderWidth={'3px'}
               onChange={(e) => {
                 setTicketType(e.target.value);
-                setTicketNumber(9);
               }}
             >
               <option value="Paid Ticket Entry">Paid Ticket Entry</option>
               <option value="Door Sale Ticket">Door Sale Ticket</option>
               <option value="Takeaway Order">Takeaway Order</option>
             </Select>
+
+            <>
+              <QrReader
+                onResult={(result, error) => {
+                  if (result !== undefined) {
+                    console.log(result);
+                    state.qrCodeDetails = result;
+                  }
+                }}
+                constraints={{
+                  width: 800,
+                  height: 600,
+                  facingMode: 'environment',
+                }}
+              />
+            </>
           </Box>
         ) : isLoading ? (
           <Loader />
