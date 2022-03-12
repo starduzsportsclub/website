@@ -1,0 +1,28 @@
+.Home {
+    text-align: center;
+    background-color: black;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    display:flex;
+  }
+  
+  .Home-header {
+    width: 50%;
+  }
+  
+  .Home-logo {
+    width: 30%;
+  }
+  
+  @media (max-width: 800px) {
+    /* CSS that should be displayed if width is equal to or less than 800px goes here */
+  
+    .Home-header {
+      width:100%;
+    }
+  
+    .Home-logo {
+      width: 70%;
+    }
+  }
