@@ -3,22 +3,20 @@ import '../../App.css';
 import state from '../../utils/state';
 import { useSnapshot } from 'valtio';
 import './Ticketer.css';
-import { useSearchParams } from 'react-router-dom';
 import Loader from '../../components/Loader/Loader';
 import { api } from '../../utils/api';
-import { Box, Button, Text } from '@chakra-ui/react';
+import { Box, Button, Select, Text } from '@chakra-ui/react';
 
 function Ticketer() {
   const snap = useSnapshot(state);
   var [isLoading, setIsLoading] = useState(false);
-
-  const [searchParams] = useSearchParams();
-  const student_id = searchParams.get('student_id');
+  var [ticketType, setTicketType] = useState('');
+  var [ticketNumber, setTicketNumber] = useState(0);
 
   const updateSheet = async () => {
     setIsLoading(true);
     const data = {
-      values: [[8, 'Paid Ticket Entry']],
+      values: [[ticketNumber, ticketType]],
     };
 
     let config = {
@@ -27,8 +25,12 @@ function Ticketer() {
       },
     };
 
-    await api.post('/A6:B6:append', data, config);
-    setIsLoading(false);
+    try {
+      await api.put(`/A${ticketNumber}:B${ticketNumber}`, data, config);
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -52,8 +54,25 @@ function Ticketer() {
             >
               Scan QR Code
             </Button>
+            <Select
+              placeholder="Select ticket option"
+              size="lg"
+              color={'white'}
+              mt={10}
+              fontWeight="bold"
+              fontFamily={'Montserrat'}
+              borderWidth={'3px'}
+              onChange={(e) => {
+                setTicketType(e.target.value);
+                setTicketNumber(9);
+              }}
+            >
+              <option value="Paid Ticket Entry">Paid Ticket Entry</option>
+              <option value="Door Sale Ticket">Door Sale Ticket</option>
+              <option value="Takeaway Order">Takeaway Order</option>
+            </Select>
           </Box>
-        ) : student_id ? (
+        ) : isLoading ? (
           <Loader />
         ) : (
           <Text
