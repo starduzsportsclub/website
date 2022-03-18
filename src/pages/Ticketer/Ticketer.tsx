@@ -7,6 +7,7 @@ import Loader from '../../components/Loader/Loader';
 import { api } from '../../utils/api';
 import { Box, Button, Select, Text } from '@chakra-ui/react';
 import { QrReader } from 'react-qr-reader';
+import Header from '../../components/Header/Header';
 
 function Ticketer() {
   const snap = useSnapshot(state);
@@ -14,21 +15,20 @@ function Ticketer() {
   var [ticketType, setTicketType] = useState('');
   var [isQRScannerEnabled, setIsQRScannerEnabled] = useState(false);
 
-  const updateSheet = async () => {
+  const updateSheet = async (result: any) => {
     setIsLoading(true);
-
-    const ticketNumber = Number(snap.qrCodeDetails.text);
-    const data = {
-      values: [[ticketNumber, ticketType]],
-    };
-
-    let config = {
-      headers: {
-        Authorization: `Bearer ${snap.loginDetails.accessToken}`,
-      },
-    };
-
     try {
+      const ticketNumber = Number(result.text);
+      const data = {
+        values: [[ticketNumber, ticketType]],
+      };
+
+      let config = {
+        headers: {
+          Authorization: `Bearer ${snap.loginDetails.accessToken}`,
+        },
+      };
+
       await api.put(`/A${ticketNumber}:B${ticketNumber}`, data, config);
       setTicketType('');
       setIsLoading(false);
@@ -47,6 +47,7 @@ function Ticketer() {
 
   return (
     <Box className="Ticketer">
+      <Header />
       <Box className="Ticketer-header">
         {snap.loginDetails && !isLoading ? (
           <Box mt={100} mx={10}>
@@ -83,7 +84,7 @@ function Ticketer() {
                   if (result !== undefined) {
                     state.qrCodeDetails = result;
                     setIsQRScannerEnabled(false);
-                    updateSheet();
+                    updateSheet(result);
                   }
                 }}
                 constraints={{

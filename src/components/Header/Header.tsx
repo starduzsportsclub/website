@@ -85,6 +85,7 @@ export const Header = () => {
               <GoogleLogin
                 clientId="421009146571-9fceck9of1r85b0gqtod0imj73n0kssm.apps.googleusercontent.com"
                 buttonText="Login"
+                isSignedIn={true}
                 render={(renderProps) => (
                   <MenuItem
                     onClick={renderProps.onClick}
