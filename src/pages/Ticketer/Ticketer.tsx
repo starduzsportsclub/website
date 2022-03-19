@@ -7,7 +7,6 @@ import Loader from '../../components/Loader/Loader';
 import { api } from '../../utils/api';
 import { Box, Button, Select, Text } from '@chakra-ui/react';
 import { QrReader } from 'react-qr-reader';
-import Header from '../../components/Header/Header';
 
 function Ticketer() {
   const snap = useSnapshot(state);
@@ -47,7 +46,6 @@ function Ticketer() {
 
   return (
     <Box className="Ticketer">
-      <Header />
       <Box className="Ticketer-header">
         {snap.loginDetails && !isLoading ? (
           <Box mt={100} mx={10}>

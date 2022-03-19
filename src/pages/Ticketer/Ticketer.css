@@ -7,10 +7,10 @@
     min-height: 100vh;
   }
   
-  .Ticketer-header {
+  /* .Ticketer-header {
     width: 50%;
  
-  }
+  } */
   
   @media (max-width: 800px) {
     /* CSS that should be displayed if width is equal to or less than 800px goes here */

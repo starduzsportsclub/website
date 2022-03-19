@@ -15,11 +15,11 @@ import { useSnapshot } from 'valtio';
 import GoogleLogin from 'react-google-login';
 import { GoogleLogout } from 'react-google-login';
 import { HamburgerIcon } from '@chakra-ui/icons';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
   const snap = useSnapshot(state);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const responseGoogle = (response: any) => {
     if (response.error) {
@@ -56,9 +56,9 @@ export const Header = () => {
               ></MenuGroup>
 
               <MenuDivider />
-              <MenuItem onClick={() => navigate('/ticketer')}>
+              {/* <MenuItem onClick={() => navigate('/ticketer')}>
                 Navigate to Ticketer
-              </MenuItem>
+              </MenuItem> */}
               <GoogleLogout
                 clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
                 buttonText="Logout"
